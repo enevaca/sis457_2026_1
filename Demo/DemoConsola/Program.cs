@@ -103,7 +103,7 @@ long factorial(int numero) {
 }
 
 Console.Write("Ingrese un número para obtener los primeros N factoriales: ");
-int numero = Convert.ToInt32(Console.ReadLine());
+int numero = 3; // Convert.ToInt32(Console.ReadLine());
 for (int i = 0; i <= numero; i++) {
     Console.WriteLine($"El factorial de {i} es {factorial(i)}");
 }
@@ -128,4 +128,62 @@ estudiante.celular = 72727272;
 estudiante.carnetUniversitario = "26-1234";
 estudiante.saludar();
 
-Console.WriteLine(estudiante.edad());
+Docente docente = new Docente();
+docente.cedulaIdentidad = "987654";
+docente.nombres = "Carlos";
+docente.primerApellido = "Villagreal";
+docente.segundoApellido = "Martínez";
+docente.fechaNacimiento = new DateOnly(1900, 8, 6);
+docente.celular = 73737373;
+docente.item = 777;
+docente.saludar();
+
+// Clases Abstractas
+//FiguraGeometrica figura = new FiguraGeometrica(); // No se puede instanciar una clase abstracta
+FiguraGeometrica cuadrado = new Cuadrado(5);
+Console.WriteLine($"El área del cuadrado es {cuadrado.area()}");
+Console.WriteLine($"El perímetro del cuadrado es {cuadrado.perimetro()}");
+
+FiguraGeometrica reactangulo = new Rectangulo(8, 5);
+Console.WriteLine($"El área del rectángulo es {reactangulo.area()}");
+Console.WriteLine($"El perímetro del rectángulo es {reactangulo.perimetro()}");
+
+// Interfaces
+// IVehiculo vehiculo = new IVehiculo(); // No se puede instanciar un interface
+Automovil automovil = new();
+automovil.acelerar(100);
+automovil.frenar();
+automovil.girar(30);
+
+// Manejo de Excepciones
+int dividendo, divisor, resultado;
+try
+{
+    dividendo = 5;
+    divisor = 0; // 0 -> va a ir por el catch porque dará error de división por cero
+    resultado = dividendo / divisor;
+    Console.WriteLine($"El resultado de la división es {resultado}");
+}
+catch (Exception) {
+    Console.WriteLine("No es posible la división por Cero (0)");
+}
+finally {
+    resultado = 0;
+}
+
+// Programación Asíncrona
+metodoAsincrono();
+Console.WriteLine("Presione cualquier tecla para salir...");
+Console.ReadLine();
+
+static async void metodoAsincrono() { 
+    await metodoDeLargaDuracion();
+}
+
+static async Task<int> metodoDeLargaDuracion() {
+    Console.WriteLine("Iniciando método de larga duración");
+    await Task.Delay(5000);
+    Console.WriteLine("Fin de la tarea de larga duración");
+    return 0;
+}
+
