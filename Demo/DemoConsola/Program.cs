@@ -1,4 +1,5 @@
-﻿
+﻿using DemoConsola;
+
 // Esto es un comentario de una sola línea
 /* Esto es un comentario
    de varias líneas */
@@ -107,4 +108,24 @@ for (int i = 0; i <= numero; i++) {
     Console.WriteLine($"El factorial de {i} es {factorial(i)}");
 }
 
-Console.WriteLine(cadenaInvertida);
+// POO - Programación Orientada a Objetos
+Persona persona = new Persona();
+persona.cedulaIdentidad = "123456";
+persona.nombres = "Juan";
+persona.primerApellido = "Pérez";
+persona.segundoApellido = "López";
+persona.fechaNacimiento = new DateOnly(2003, 12, 25);
+persona.celular = 71717171;
+persona.saludar();
+
+Estudiante estudiante = new Estudiante();
+estudiante.cedulaIdentidad = "654321";
+estudiante.nombres = "María";
+estudiante.primerApellido = "Gómez";
+estudiante.segundoApellido = "Suárez";
+estudiante.fechaNacimiento = new DateOnly(2005, 8, 6);
+estudiante.celular = 72727272;
+estudiante.carnetUniversitario = "26-1234";
+estudiante.saludar();
+
+Console.WriteLine(estudiante.edad());
