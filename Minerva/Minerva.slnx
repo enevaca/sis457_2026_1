@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CadMinerva/CadMinerva.csproj" />
+  <Project Path="ClnMinerva/ClnMinerva.csproj" />
+  <Project Path="CpMinerva/CpMinerva.csproj" />
+</Solution>

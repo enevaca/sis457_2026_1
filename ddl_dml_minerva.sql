@@ -108,6 +108,20 @@ ALTER TABLE Compra ADD estado INT NOT NULL DEFAULT 1; -- -1: Eliminado, 0: Inact
 ALTER TABLE CompraDetalle ADD usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME();
 ALTER TABLE CompraDetalle ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
 ALTER TABLE CompraDetalle ADD estado INT NOT NULL DEFAULT 1; -- -1: Eliminado, 0: Inactivo, 1: Activo
+GO
+DROP PROC IF EXISTS paProductoListar;
+GO
+CREATE PROC paProductoListar @parametro VARCHAR(50)
+AS
+  SELECT p.id, p.idUnidadMedida, p.codigo, p.descripcion, um.descripcion AS unidadMedida, 
+         p.saldo, p.precioVenta, p.usuarioRegistro, p.fechaRegistro, p.estado
+  FROM Producto p
+  INNER JOIN UnidadMedida um ON um.id = p.idUnidadMedida
+  WHERE p.estado=1 AND p.codigo+p.descripcion+um.descripcion LIKE '%'+REPLACE(@parametro,' ','%')+'%'
+  ORDER BY p.descripcion;
+GO
+EXEC paProductoListar 'papel carta';
+
 
 -- DML
 INSERT INTO UnidadMedida (descripcion)
