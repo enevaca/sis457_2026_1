@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="CadMinerva/CadMinerva.csproj" />
-  <Project Path="ClnMinerva/ClnMinerva.csproj" />
-  <Project Path="CpMinerva/CpMinerva.csproj" />
+  <Project Path="CadMinerva/CadMinerva.csproj" Id="8424fb70-8b25-4268-b80d-c49cbd0b8716" />
+  <Project Path="ClnMinerva/ClnMinerva.csproj" Id="68d07774-cbf3-4a00-811d-6841d97b508a" />
+  <Project Path="CpMinerva/CpMinerva.csproj" Id="2f5b96a1-4a36-4764-b57e-9d081e3bc16b" />
 </Solution>
