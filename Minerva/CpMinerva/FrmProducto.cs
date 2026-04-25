@@ -161,7 +161,7 @@ namespace CpMinerva
                     idUnidadMedida = (int)cbxUnidadMedida.SelectedValue,
                     saldo = nudSaldo.Value,
                     precioVenta = nudPrecioVenta.Value,
-                    usuarioRegistro = "admin"
+                    usuarioRegistro = Util.usuario.usuario1
                 };
 
                 if (esNuevo) {
@@ -187,7 +187,7 @@ namespace CpMinerva
             DialogResult dialog = MessageBox.Show($"Está seguro que desea eliminar el producto {codigo}",
                 "::: Mensaje - Minerva :::", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialog == DialogResult.Yes) { 
-                ProductoCln.eliminar(id, "admin");
+                ProductoCln.eliminar(id, Util.usuario.usuario1);
                 listar();
                 MessageBox.Show("Producto dado de baja correctamente", "::: Mensaje - Minerva :::",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);

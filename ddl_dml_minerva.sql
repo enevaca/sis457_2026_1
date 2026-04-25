@@ -136,5 +136,13 @@ VALUES (4, 'PB015', 'Papel Bond Tamaño Carta 75 g/m²', 0, 20);
 INSERT INTO Producto (idUnidadMedida, codigo, descripcion, saldo, precioVenta)
 VALUES (4, 'PB016', 'Papel Bond Tamaño Oficio 75 g/m²', 0, 23);
 
+INSERT INTO Empleado (cedulaIdentidad, nombres, primerApellido, segundoApellido, 
+    fechaNacimiento, direccion, celular, cargo)
+VALUES ('123456', 'Juan', 'Pérez', 'López', '2006-12-25', 'Calle Loa 50', 71717171, 'Administrador');
+
+INSERT INTO Usuario (idEmpleado, usuario, clave)
+VALUES (1, 'jperez', 'i0hcoO/nssY6WOs9pOp5Xw==');
+
 SELECT * FROM UnidadMedida;
 SELECT * FROM Producto WHERE descripcion LIKE '%papel%';
+SELECT * FROM Usuario;
