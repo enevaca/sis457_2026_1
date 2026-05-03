@@ -25,7 +25,7 @@ namespace CpMinerva
             frmAutenticacion.Show();
         }
 
-        private void btnProductos_Click(object sender, EventArgs e)
+        private void btnCaProductos_Click(object sender, EventArgs e)
         {
             new FrmProducto().ShowDialog();
         }

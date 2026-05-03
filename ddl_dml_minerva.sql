@@ -15,11 +15,14 @@ GO
 ALTER ROLE db_owner ADD MEMBER usrminerva
 GO
 
+DROP TABLE IF EXISTS VentaDetalle;
+DROP TABLE IF EXISTS Venta;
 DROP TABLE IF EXISTS CompraDetalle;
 DROP TABLE IF EXISTS Compra;
 DROP TABLE IF EXISTS Usuario;
 DROP TABLE IF EXISTS Empleado;
 DROP TABLE IF EXISTS Proveedor;
+DROP TABLE IF EXISTS Cliente;
 DROP TABLE IF EXISTS Producto;
 DROP TABLE IF EXISTS UnidadMedida;
 
@@ -80,6 +83,32 @@ CREATE TABLE CompraDetalle (
   CONSTRAINT fk_CompraDetalle_Compra FOREIGN KEY (idCompra) REFERENCES Compra(id),
   CONSTRAINT fk_CompraDetalle_Producto FOREIGN KEY (idProducto) REFERENCES Producto(id)
 );
+CREATE TABLE Cliente (
+  id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  nit BIGINT NOT NULL,
+  razonSocial VARCHAR(100) NOT NULL UNIQUE
+);
+CREATE TABLE Venta (
+  id BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  idCliente INT NOT NULL,
+  idUsuario INT NOT NULL,
+  transaccion INT NOT NULL,
+  fecha DATE NOT NULL,
+  total DECIMAL NOT NULL CHECK (total > 0),
+  CONSTRAINT fk_Venta_Cliente FOREIGN KEY (idCliente) REFERENCES Cliente(id),
+  CONSTRAINT fk_Venta_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuario(id)
+);
+CREATE TABLE VentaDetalle (
+  id BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  idVenta BIGINT NOT NULL,
+  idProducto INT NOT NULL,
+  cantidad DECIMAL NOT NULL CHECK (cantidad > 0),
+  precioUnitario DECIMAL NOT NULL CHECK (precioUnitario > 0),
+  total DECIMAL NOT NULL CHECK (total > 0),
+  CONSTRAINT fk_VentaDetalle_Venta FOREIGN KEY (idVenta) REFERENCES Venta(id),
+  CONSTRAINT fk_VentaDetalle_Producto FOREIGN KEY (idProducto) REFERENCES Producto(id)
+);
+
 
 ALTER TABLE UnidadMedida ADD usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME();
 ALTER TABLE UnidadMedida ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
@@ -108,6 +137,19 @@ ALTER TABLE Compra ADD estado INT NOT NULL DEFAULT 1; -- -1: Eliminado, 0: Inact
 ALTER TABLE CompraDetalle ADD usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME();
 ALTER TABLE CompraDetalle ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
 ALTER TABLE CompraDetalle ADD estado INT NOT NULL DEFAULT 1; -- -1: Eliminado, 0: Inactivo, 1: Activo
+
+ALTER TABLE Cliente ADD usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME();
+ALTER TABLE Cliente ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
+ALTER TABLE Cliente ADD estado INT NOT NULL DEFAULT 1; -- -1: Eliminado, 0: Inactivo, 1: Activo
+
+ALTER TABLE Venta ADD usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME();
+ALTER TABLE Venta ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
+ALTER TABLE Venta ADD estado INT NOT NULL DEFAULT 1; -- -1: Eliminado, 0: Inactivo, 1: Activo
+
+ALTER TABLE VentaDetalle ADD usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME();
+ALTER TABLE VentaDetalle ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
+ALTER TABLE VentaDetalle ADD estado INT NOT NULL DEFAULT 1; -- -1: Eliminado, 0: Inactivo, 1: Activo
+
 GO
 DROP PROC IF EXISTS paProductoListar;
 GO
