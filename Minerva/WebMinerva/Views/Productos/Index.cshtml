@@ -1,0 +1,60 @@
+@model IEnumerable<WebMinerva.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Productos</h1>
+
+<p>
+    <a asp-action="Create"><i class="fa fa-plus" aria-hidden="true"></i> Crear Nuevo</a>
+</p>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Unidad de Medida</th>
+                <th>Saldo</th>
+                <th>Precio de Venta</th>
+                <th>Usuario Registro</th>
+                <th>Fecha Registro</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.IdUnidadMedidaNavigation.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Saldo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.PrecioVenta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.UsuarioRegistro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.FechaRegistro)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-eye" aria-hidden="true"></i></a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit" aria-hidden="true"></i></a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
