@@ -1,9 +1,11 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebMinerva.Models;
 
+[Authorize]
 public class ProductosController : Controller
 {
     private readonly MinervaContext _context;
